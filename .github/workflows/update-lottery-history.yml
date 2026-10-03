@@ -1,0 +1,43 @@
+name: Update Taiwan Lottery 39 history
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 05:30 Taiwan time every day
+    - cron: '30 21 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_history.mjs'
+      - '.github/workflows/update-lottery-history.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-lottery-history
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch and validate all historical draws
+        run: node scripts/update_history.mjs
+      - name: Save updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/history.json; then
+            echo "Historical data is unchanged."
+          else
+            git add data/history.json
+            git commit -m "Update 39 lottery historical data"
+            git push
+          fi
