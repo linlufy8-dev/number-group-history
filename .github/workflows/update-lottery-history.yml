@@ -34,10 +34,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/history.json; then
+          git add data/history.json
+          if git diff --cached --quiet -- data/history.json; then
             echo "Historical data is unchanged."
           else
-            git add data/history.json
             git commit -m "Update 39 lottery historical data"
             git push
           fi
