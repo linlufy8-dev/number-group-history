@@ -1,8 +1,8 @@
 {
   "source": "公開 39 樂合彩歷史資料 API（依台灣彩券公開開獎資訊彙整）",
   "sourceUrl": "https://lottery.timetable.tw/draws/39-le-he-cai",
-  "updatedAt": "2026-10-23T21:57:40.568Z",
-  "totalCount": 1503,
+  "updatedAt": "2026-10-24T21:52:56.293Z",
+  "totalCount": 1504,
   "records": [
     {
       "period": "111000001",
@@ -16535,6 +16535,17 @@
         14,
         17,
         27
+      ]
+    },
+    {
+      "period": "115000258",
+      "date": "2026-10-24",
+      "numbers": [
+        1,
+        17,
+        24,
+        27,
+        35
       ]
     }
   ]
